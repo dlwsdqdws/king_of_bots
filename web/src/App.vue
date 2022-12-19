@@ -1,33 +1,17 @@
 <template>
-  <div>
-    <div>bot name: {{ botname }}</div>
-    <div>bot rate: {{ botrate }}</div>
-  </div>
-  <router-view/>
+  <NavBar />
+  <router-view> </router-view>
 </template>
 
 <script>
-  import $ from 'jquery';
-  import {ref} from 'vue';
+  import "bootstrap/dist/css/bootstrap.min.css";
+  import "bootstrap/dist/js/bootstrap";
 
-
+  import NavBar from './components/NavBar.vue';
 
   export default {
-    name : "App",
-    setup : () => {
-      let botname = ref("");
-      let botrate = ref("");
-
-      $.ajax({
-        url : "http://127.0.0.1:3000/pk/getbotinfo/",
-        type : "get",
-        success : resp => {
-          botname.value = resp.name;
-          botrate.value = resp.rate;
-        }
-      })
-
-      return {botname, botrate};
+    components: {
+      NavBar
     }
   }
 </script>
