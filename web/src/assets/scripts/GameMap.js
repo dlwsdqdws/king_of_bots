@@ -10,8 +10,9 @@ export class GameMap extends BaseGameObject {
 
         this.L = 0;
 
+        // Centrosymmetric
         this.rows = 13;
-        this.cols = 13;
+        this.cols = 14;
 
         this.inner_walls_cnt = 20;
 
@@ -54,10 +55,10 @@ export class GameMap extends BaseGameObject {
             for(let j = 0; j < 200; j++){
                 let r = parseInt(Math.random() * this.rows);
                 let c = parseInt(Math.random() * this.cols);
-                if(g[r][c] || g[c][r]) continue;
+                if(g[r][c] || g[this.rows-1-r][this.cols-1-c]) continue;
                 if(r == this.rows-2 && c == 1 || r == 1 && c == this.cols-2) continue;
 
-                g[r][c] = g[c][r] = true;
+                g[r][c] = g[this.rows-1-r][this.cols-1-c] = true;
                 break;
             }
         }

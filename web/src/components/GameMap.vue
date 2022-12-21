@@ -2,7 +2,9 @@
     <div ref="parent" class="gamemap">
         <canvas ref="canvas"></canvas>
     </div>
-
+    <!-- <div style="text-align:center">
+        <button v-on:click = "handleClick">renew a map</button>
+    </div> -->
 </template>
 
 <script>
@@ -18,7 +20,6 @@
         onMounted(() => {
             new GameMap(canvas.value.getContext('2d'), parent.value)
         });
-
 
             return {
                 parent,
