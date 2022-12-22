@@ -29,6 +29,23 @@ export class Snake extends BaseGameObject {
         this.step = 0;
 
         this.eps = 1e-2;
+
+        this.eye_direction = 0;
+        if(this.id === 1) this.eye_direction = 2;
+
+        this.eye_dx = [
+            [-1, 1],
+            [1, 1],
+            [1, -1],
+            [-1, -1],
+        ];
+
+        this.eye_dy = [
+            [-1, -1],
+            [-1, 1],
+            [1, 1],
+            [1, -1],
+        ];
     }
 
     start(){
@@ -49,6 +66,8 @@ export class Snake extends BaseGameObject {
 
     next_step(){
         const d = this.direction;
+
+        this.eye_direction = d;
 
         this.next_cell = new Cell(this.cells[0].r + this.dr[d], this.cells[0].c + this.dc[d]);
         this.direction = -1;
@@ -135,6 +154,15 @@ export class Snake extends BaseGameObject {
             }else{
                 ctx.fillRect(Math.min(a.x, b.x) * L, (a.y - 0.4) * L, Math.abs(a.x - b.x) * L, L * 0.8);
             }
+        }
+
+        ctx.fillStyle = "black";
+        for(let i = 0; i < 2; i++){
+            const eye_x = (this.cells[0].x + this.eye_dx[this.eye_direction][i] * 0.15) * L;
+            const eye_y = (this.cells[0].y + this.eye_dy[this.eye_direction][i] * 0.15) * L;
+            ctx.beginPath();
+            ctx.arc(eye_x, eye_y, L * 0.05, 0, Math.PI * 2);
+            ctx.fill();
         }
     }
 }

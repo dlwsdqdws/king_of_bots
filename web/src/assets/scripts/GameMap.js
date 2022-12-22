@@ -33,6 +33,7 @@ export class GameMap extends BaseGameObject {
                 c : this.cols-2,
             }, this),
         ]
+
     }
 
     check_connectivity(g, sx, sy, tx, ty) {
