@@ -1,6 +1,6 @@
 <template>
     <div ref="parent" class="gamemap">
-        <canvas ref="canvas"></canvas>
+        <canvas ref="canvas" tabindex="0"></canvas>
     </div>
     <!-- <div style="text-align:center">
         <button v-on:click = "handleClick">renew a map</button>
