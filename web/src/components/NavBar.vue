@@ -12,7 +12,7 @@
           <router-link class="nav-link" active-class="active" :to = "{name : 'record_index'}">Matches</router-link>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" active-class="active" :to = "{name : 'ranklist_index'}">Battles</router-link>
+          <router-link class="nav-link" active-class="active" :to = "{name : 'ranklist_index'}">Ranklists</router-link>
         </li>
       </ul>
 
@@ -22,7 +22,7 @@
             {{ $store.state.user.username }}
           </a>
           <ul class="dropdown-menu">
-            <router-link class="dropdown-item" :to = "{name : 'user_bot_index'}">Battles</router-link>
+            <router-link class="dropdown-item" :to = "{name : 'user_bot_index'}">My Bots</router-link>
             <li><hr class = "dropdown-divider"></li>
             <li><a class="dropdown-item" href="#" @click="logout">Sign Out</a></li>
           </ul>

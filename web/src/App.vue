@@ -9,7 +9,7 @@
 
   import NavBar from './components/NavBar.vue';
 
-  import $ from "jquery";
+  // import $ from "jquery";
 
   export default {
     components: {
@@ -46,21 +46,21 @@
       //   }
       // });
 
-      $.ajax({
-        url : "http://127.0.0.1:3000/user/account/register/",
-        type : "post",
-        data : {
-          username : " ",
-          password : "test",
-          comfirmedPassword : "test",
-        },
-        success(resp){
-          console.log(resp);
-        },
-        error(resp){
-          console.log(resp);
-        }
-      });
+      // $.ajax({
+      //   url : "http://127.0.0.1:3000/user/account/register/",
+      //   type : "post",
+      //   data : {
+      //     username : " ",
+      //     password : "test",
+      //     comfirmedPassword : "test",
+      //   },
+      //   success(resp){
+      //     console.log(resp);
+      //   },
+      //   error(resp){
+      //     console.log(resp);
+      //   }
+      // });
     }
   }
 </script>
