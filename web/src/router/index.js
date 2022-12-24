@@ -85,11 +85,30 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if(to.meta.requestAuth && !store.state.user.is_login){
-    next({name : "user_account_login"});
-  } else{
-    next();
+
+  const jwt_token = localStorage.getItem("jwt_token");
+  if(jwt_token) {
+      store.commit("updateToken", jwt_token);
+      store.dispatch("getinfo", {
+          success() {
+              next();
+              store.commit("updatePullingInfo", false);
+          },
+          error() {
+              store.commit("updatePullingInfo", false);
+              next({name:"user_account_login"});
+          }
+      })
   }
+  else{
+    store.commit("updatePullingInfo", false);
+    if (to.meta.requestAuth && !store.state.user.is_login) {
+      next({name: "user_account_login"});
+    } else {
+      next();
+    }
+  }
+
 })
 
 export default router
