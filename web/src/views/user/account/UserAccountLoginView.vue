@@ -44,7 +44,6 @@
                         store.dispatch("getinfo", {
                             success(){
                                 router.push({name : 'home'});
-                                console.log(store.state.user);
                             }
                         });
                     },
