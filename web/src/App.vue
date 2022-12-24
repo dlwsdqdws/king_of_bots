@@ -30,7 +30,7 @@
         error(resp){
           console.log(resp);
         }
-      }),
+      });
 
       $.ajax({
         url : "http://127.0.0.1:3000/user/account/info/",
@@ -44,7 +44,23 @@
         error(resp){
           console.log(resp);
         }
-      })
+      });
+
+      $.ajax({
+        url : "http://127.0.0.1:3000/user/account/register/",
+        type : "post",
+        data : {
+          username : "test3",
+          password : "test",
+          comfirmedPassword : "test",
+        },
+        success(resp){
+          console.log(resp);
+        },
+        error(resp){
+          console.log(resp);
+        }
+      });
     }
   }
 </script>
