@@ -16,24 +16,53 @@
         </li>
       </ul>
 
-      <ul class="navbar-nav">
+      <ul class="navbar-nav" v-if = "$store.state.user.is_login">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Sign In/Sign Up
+            {{ $store.state.user.username }}
           </a>
           <ul class="dropdown-menu">
             <router-link class="dropdown-item" :to = "{name : 'user_bot_index'}">Battles</router-link>
             <li><hr class = "dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Sign Out</a></li>
+            <li><a class="dropdown-item" href="#" @click="logout">Sign Out</a></li>
           </ul>
         </li>
       </ul>
+
+      <ul class="navbar-nav" v-else>
+        <li class="nav-item dropdown">
+          <router-link class="nav-link" :to = "{name : 'user_account_login'}" role="button">
+           Sign In
+          </router-link>
+        </li>
+        <li class="nav-item dropdown">
+          <router-link class="nav-link" :to = "{name : 'user_account_register'}" role="button">
+           Sign Up
+          </router-link>
+        </li>
+      </ul>
+
     </div>
   </div>
 </nav>
 </template>
 
 <script>
+import {useStore} from "vuex";
+
+export default {
+  setup() {
+    const store = useStore();
+
+    const logout = () => {
+      store.dispatch("logout");
+    }
+
+    return {
+      logout
+    }
+  }
+}
 
 </script>
 
