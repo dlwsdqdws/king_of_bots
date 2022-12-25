@@ -64,7 +64,7 @@
                                     <td>{{ bot.createtime }}</td>
                                     <td>
                                         <button type="button" class="btn btn-secondary" style = "margin-right: 10px;">Modify</button>
-                                        <button type="button" class="btn btn-danger">Delete</button>
+                                        <button type="button" class="btn btn-danger" @click="remove_bot(bot)">Delete</button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -115,20 +115,20 @@
             // });
 
             // $.ajax({
-            //     url : "http://127.0.0.1:3000/user/bot/remove/",
-            //     type : "post",
-            //     data : {
-            //         bot_id : 4,
-            //     },
-            //     headers : {
-            //         Authorization : "Bearer " + store.state.user.token,
-            //     },
-            //     success(resp){
-            //         console.log(resp);
-            //     },
-            //     error(resp){
-            //         console.log(resp);
-            //     }
+                // url : "http://127.0.0.1:3000/user/bot/remove/",
+                // type : "post",
+                // data : {
+                //     bot_id : 4,
+                // },
+                // headers : {
+                //     Authorization : "Bearer " + store.state.user.token,
+                // },
+                // success(resp){
+                //     console.log(resp);
+                // },
+                // error(resp){
+                //     console.log(resp);
+                // }
             // });
 
             // $.ajax({
@@ -194,11 +194,11 @@
                         Authorization : "Bearer " + store.state.user.token,
                     },
                     success(resp){
-                        botadd.title = "";
-                        botadd.description = "";
-                        botadd.content = "";
-                        Modal.getInstance("#add-bot-button").hide();
                         if(resp.error_msg === "success"){
+                            botadd.title = "";
+                            botadd.description = "";
+                            botadd.content = "";
+                            Modal.getInstance("#add-bot-button").hide();
                             refresh_bots();
                         }else{
                             botadd.error_msg = resp.error_msg;
@@ -207,10 +207,29 @@
                 });
             }
 
+            const remove_bot = (bot) => {
+                $.ajax({
+                    url : "http://127.0.0.1:3000/user/bot/remove/",
+                    type : "post",
+                    data : {
+                        bot_id : bot.id,
+                    },
+                    headers : {
+                        Authorization : "Bearer " + store.state.user.token,
+                    },
+                    success(resp){
+                        if(resp.error_msg === "success"){
+                            refresh_bots();
+                        }
+                    },
+                });
+            }
+
             return {
                 bots,
                 botadd,
-                add_bot
+                add_bot,
+                remove_bot,
             }
         }
     }
