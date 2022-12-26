@@ -53,10 +53,18 @@
                                             :lang="states.lang"
                                             :theme="states.theme"
                                             :options="{
+                                                //https://juejin.cn/post/7133470577775345671
                                                 useWorker: true,
                                                 enableBasicAutocompletion: true,
                                                 enableSnippets: true,
                                                 enableLiveAutocompletion: true,
+                                                fontSize : 14,
+                                                showPrintMargin: false,
+                                                printMargin: true,
+                                                enableMultiselect: true,
+                                                animatedScroll: true,
+                                                showFoldWidgets: true,
+                                                fadeFoldWidgets: true,
                                             }"
                                             style="height: 300px" />
                                     </div>
@@ -124,10 +132,18 @@
                                                             :lang="states.lang"
                                                             :theme="states.theme"
                                                             :options="{
+                                                                //https://juejin.cn/post/7133470577775345671
                                                                 useWorker: true,
                                                                 enableBasicAutocompletion: true,
                                                                 enableSnippets: true,
                                                                 enableLiveAutocompletion: true,
+                                                                fontSize : 14,
+                                                                showPrintMargin: false,
+                                                                printMargin: true,
+                                                                enableMultiselect: true,
+                                                                animatedScroll: true,
+                                                                showFoldWidgets: true,
+                                                                fadeFoldWidgets: true,
                                                             }"
                                                             style="height: 300px" />
                                                     </div>
