@@ -36,11 +36,22 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="add-bot-code" class="form-label">Code</label>
+
+                                        <div>
+                                            <select v-model="states.lang">
+                                                <option v-for="lang of langs" :key="lang" :value="lang">{{ lang }}</option>
+                                            </select>
+
+                                            <select v-model="states.theme">
+                                                <option v-for="theme of themes" :key="theme" :value="theme">{{ theme }}</option> 
+                                            </select>
+                                        </div>
+
                                         <VAceEditor
                                             v-model:value="botadd.content"
                                             @init="editorInit"
-                                            lang="c_cpp"
-                                            theme="textmate"
+                                            :lang="states.lang"
+                                            :theme="states.theme"
                                             style="height: 300px" />
                                     </div>
                                 </div>
@@ -90,14 +101,22 @@
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="add-bot-code" class="form-label">Code</label>
-                                                        <!-- <select v-model="states.lang">
-                                                            <option v-for="lang of langs" :value="lang">{{ lang }}</option>
-                                                        </select> -->
+
+                                                        <div>
+                                                            <select v-model="states.lang">
+                                                                <option v-for="lang of langs" :key="lang" :value="lang">{{ lang }}</option>
+                                                            </select>
+
+                                                            <select v-model="states.theme">
+                                                                <option v-for="theme of themes" :key="theme" :value="theme">{{ theme }}</option> 
+                                                            </select>
+                                                        </div>
+
                                                         <VAceEditor
                                                             v-model:value="bot.content"
                                                             @init="editorInit"
-                                                            lang="c_cpp"
-                                                            theme="textmate"
+                                                            :lang="states.lang"
+                                                            :theme="states.theme"
                                                             style="height: 300px" />
                                                     </div>
                                                 </div>
@@ -125,10 +144,11 @@
 <script>
     import $ from "jquery";
     import {useStore} from "vuex";
-    import {ref, reactive} from "vue";
+    import {ref, reactive, watch} from "vue";
     import {Modal} from "bootstrap/dist/js/bootstrap";
     import { VAceEditor } from 'vue3-ace-editor';
     import ace from 'ace-builds';
+    import '../bots/lang_packs/ace-config.ts';
 
 
     export default {
@@ -144,7 +164,27 @@
             const store = useStore();
             let bots = ref([]);
 
-            // const langs = ['json', 'javascript', 'html', 'yaml'];
+            const langs = ['json', 'javascript', 'c_cpp'];
+            const themes = ['github', 'chrome', 'monokai'];
+
+            const states = reactive({
+                lang: 'c_cpp',
+                theme: 'monokai',
+            });
+
+            watch(
+                () => states.lang,
+                async lang => {
+                    states.content = (
+                    await {
+                        json: import('../bots/lang_packs/package.json?raw'),
+                        javascript: import('../bots/lang_packs/ace-config.ts?raw'),
+                        c_cpp : '',
+                    }[lang]
+                    ).default;
+                },
+                { immediate: true },
+            );
 
             let botadd = reactive({
                 title : "",
@@ -153,76 +193,6 @@
                 error_msg : ""
             });
 
-            // test APIs
-            // $.ajax({
-            //     url : "http://127.0.0.1:3000/user/bot/add/",
-            //     type : "post",
-            //     data : {
-            //         title : "mybottitle",
-            //         description : "mybotdescription",
-            //         content : "mybotcontent"
-            //     },
-            //     headers : {
-            //         Authorization : "Bearer " + store.state.user.token,
-            //     },
-            //     success(resp){
-            //         console.log(resp);
-            //     },
-            //     error(resp){
-            //         console.log(resp);
-            //     }
-            // });
-
-            // $.ajax({
-                // url : "http://127.0.0.1:3000/user/bot/remove/",
-                // type : "post",
-                // data : {
-                //     bot_id : 4,
-                // },
-                // headers : {
-                //     Authorization : "Bearer " + store.state.user.token,
-                // },
-                // success(resp){
-                //     console.log(resp);
-                // },
-                // error(resp){
-                //     console.log(resp);
-                // }
-            // });
-
-            // $.ajax({
-            //     url : "http://127.0.0.1:3000/user/bot/update/",
-            //     type : "post",
-            //     data : {
-            //         bot_id : 3,
-            //         title : "666",
-            //         description : "666",
-            //         content : "666"
-            //     },
-                // headers : {
-                //     Authorization : "Bearer " + store.state.user.token,
-                // },
-            //     success(resp){
-            //         console.log(resp);
-            //     },
-            //     error(resp){
-            //         console.log(resp);
-            //     }
-            // });
-
-            // $.ajax({
-            //     url : "http://127.0.0.1:3000/user/bot/getlist/",
-            //     type : "get",
-            //     headers : {
-            //         Authorization : "Bearer " + store.state.user.token,
-            //     },
-            //     success(resp){
-            //         console.log(resp);
-            //     },
-            //     error(resp){
-            //         console.log(resp);
-            //     }
-            // });
 
             const refresh_bots = () => {
                 $.ajax({
@@ -314,7 +284,10 @@
                 botadd,
                 add_bot,
                 remove_bot,
-                update_bot
+                update_bot,
+                langs,
+                themes,
+                states,
             }
         }
     }
@@ -323,5 +296,10 @@
 <style scoped>
 div.error-msg{
     color : red;
+}
+
+select {
+  margin-right: 15px;
+  margin-bottom: 10px;
 }
 </style>
