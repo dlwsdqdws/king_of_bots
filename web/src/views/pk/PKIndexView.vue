@@ -31,11 +31,22 @@
 
                 socket.onopen = ()=> {
                     console.log("connected");
+                    store.commit("updateSocket", socket);
                 }
 
                 socket.onmessage = msg => {
                     const data = JSON.parse(msg.data);
-                    console.log(data);
+                    
+                    if(data.event === "start_matching"){
+                        // mathch successfully
+                        store.commit("updateOpponent", {
+                            username : data.opponent_username,
+                            photo : data.opponent_photo,
+                        });
+                        setTimeout(() => {
+                            store.commit("updateStatus", "playing");
+                        }, 2000);
+                    }
                 }
 
                 socket.onclose = () => {
@@ -44,6 +55,7 @@
             });
 
             onUnmounted(() => {
+                store.commit("updateStatus", "matching");
                 socket.close();
             });
         }
