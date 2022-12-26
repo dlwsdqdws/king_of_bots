@@ -30,7 +30,7 @@
                 socket = new WebSocket(socketUrl);
 
                 socket.onopen = ()=> {
-                    console.log("connected");
+                    // console.log("connected");
                     store.commit("updateSocket", socket);
                 }
 
@@ -46,11 +46,12 @@
                         setTimeout(() => {
                             store.commit("updateStatus", "playing");
                         }, 2000);
+                        store.commit("updateGamemap", data.gamemap);
                     }
                 }
 
                 socket.onclose = () => {
-                    console.log("disconnected");
+                    // console.log("disconnected");
                 }
             });
 
