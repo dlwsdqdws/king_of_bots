@@ -52,6 +52,12 @@
                                             @init="editorInit"
                                             :lang="states.lang"
                                             :theme="states.theme"
+                                            :options="{
+                                                useWorker: true,
+                                                enableBasicAutocompletion: true,
+                                                enableSnippets: true,
+                                                enableLiveAutocompletion: true,
+                                            }"
                                             style="height: 300px" />
                                     </div>
                                 </div>
@@ -117,6 +123,12 @@
                                                             @init="editorInit"
                                                             :lang="states.lang"
                                                             :theme="states.theme"
+                                                            :options="{
+                                                                useWorker: true,
+                                                                enableBasicAutocompletion: true,
+                                                                enableSnippets: true,
+                                                                enableLiveAutocompletion: true,
+                                                            }"
                                                             style="height: 300px" />
                                                     </div>
                                                 </div>
@@ -148,8 +160,23 @@
     import {Modal} from "bootstrap/dist/js/bootstrap";
     import { VAceEditor } from 'vue3-ace-editor';
     import ace from 'ace-builds';
-    import '../bots/lang_packs/ace-config.ts';
+    import "ace-builds/webpack-resolver";
+    
 
+    import modeC_cppUrl from 'ace-builds/src-noconflict/mode-c_cpp?url';
+    import modeJavaUrl from 'ace-builds/src-noconflict/mode-java?url';
+    import modePythonUrl from 'ace-builds/src-noconflict/mode-python?url';
+
+    import themeGithubUrl from 'ace-builds/src-noconflict/theme-github?url';
+    import themeChromeUrl from 'ace-builds/src-noconflict/theme-chrome?url';
+    import themeMonokaiUrl from 'ace-builds/src-noconflict/theme-monokai?url';
+
+    import workerBaseUrl from 'ace-builds/src-noconflict/worker-base?url';
+
+    import snippetsJavaUrl from 'ace-builds/src-noconflict/snippets/java?url';
+    import snippetsPythonUrl from 'ace-builds/src-noconflict/snippets/python?url';
+
+    import 'ace-builds/src-noconflict/ext-language_tools';
 
     export default {
         components : {
@@ -161,10 +188,21 @@
                 "https://cdn.jsdelivr.net/npm/ace-builds@" + require('ace-builds').version + "/src-noconflict/")
 
 
+            ace.config.setModuleUrl('ace/mode/c_cpp', modeC_cppUrl);
+            ace.config.setModuleUrl('ace/mode/java', modeJavaUrl);
+            ace.config.setModuleUrl('ace/mode/python', modePythonUrl);
+            ace.config.setModuleUrl('ace/theme/github', themeGithubUrl);
+            ace.config.setModuleUrl('ace/theme/chrome', themeChromeUrl);
+            ace.config.setModuleUrl('ace/theme/monokai', themeMonokaiUrl);
+            ace.config.setModuleUrl('ace/mode/base', workerBaseUrl);
+            ace.config.setModuleUrl('ace/snippets/javascript', snippetsJavaUrl);
+            ace.config.setModuleUrl('ace/snippets/json', snippetsPythonUrl);
+            ace.require("ace/ext/language_tools");
+
             const store = useStore();
             let bots = ref([]);
 
-            const langs = ['json', 'javascript', 'c_cpp'];
+            const langs = ['c_cpp', 'java', 'python'];
             const themes = ['github', 'chrome', 'monokai'];
 
             const states = reactive({
@@ -177,9 +215,9 @@
                 async lang => {
                     states.content = (
                     await {
-                        json: import('../bots/lang_packs/package.json?raw'),
-                        javascript: import('../bots/lang_packs/ace-config.ts?raw'),
                         c_cpp : '',
+                        java :  '',
+                        python : '',
                     }[lang]
                     ).default;
                 },
