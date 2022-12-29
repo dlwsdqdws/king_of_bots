@@ -2,8 +2,13 @@
 
 ## Page Layout
 ### Battles
+Game matching and operations. Need sign in first.
+#### Using keyboard as input
+WASD -> up, left, down, right
+#### Writing code as input
+
 
 ### Matches
-Show all players' matching history, including players' usernames and photos, winner and matching video.
+Show ALL players' matching history, including players' usernames and photos, winner and matching video.
 
 ### Ranklists
