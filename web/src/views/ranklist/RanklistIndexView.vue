@@ -115,14 +115,14 @@
                     page = current_page + 1;
                 }
 
-                let max_pages = parseInt(Math.ceil(tot_users / 3));
+                let max_pages = parseInt(Math.ceil(tot_users / 10));
                 if(page >= 1 && page <= max_pages){
                     pull_page(page);
                 }
             }
 
             const update_pages = () => {
-                let max_pages = parseInt(Math.ceil(tot_users / 3));
+                let max_pages = parseInt(Math.ceil(tot_users / 10));
                 let new_pages = [];
 
                 for(let i = current_page-2; i <= current_page+2; i++){
@@ -140,7 +140,7 @@
             const pull_page = page => {
                 current_page = page
                 $.ajax({
-                    url : "http://127.0.0.1:3000/ranklist/getlist/",
+                    url : "https://app777.acapp.acwing.com.cn/api/ranklist/getlist/",
                     data : {
                         page,
                     },
@@ -162,7 +162,7 @@
 
             const pull_winners = () => {
                 $.ajax({
-                    url : "http://127.0.0.1:3000/ranklist/getlist/",
+                    url : "https://app777.acapp.acwing.com.cn/api/ranklist/getlist/",
                     data : {
                         page : 1,
                     },

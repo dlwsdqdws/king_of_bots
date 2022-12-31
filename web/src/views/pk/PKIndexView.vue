@@ -2,6 +2,8 @@
     <PlayGround v-if = "$store.state.pk.status === 'playing'" /> 
     <MatchGrond v-if = "$store.state.pk.status === 'matching'" />
     <ResultBoard v-if = "$store.state.pk.loser !== 'none'" />
+    <div class = "user-color1" v-if = "$store.state.pk.status === 'playing' && parseInt($store.state.user.id) === parseInt($store.state.pk.a_id)">left-bottom</div>
+    <div class = "user-color2" v-if = "$store.state.pk.status === 'playing' && parseInt($store.state.user.id) === parseInt($store.state.pk.b_id)">right-top</div>
 </template>
 
 <script>
@@ -20,7 +22,7 @@
 
         setup(){
             const store = useStore();
-            const socketUrl = `ws://127.0.0.1:3000/websocket/${store.state.user.token}/`;
+            const socketUrl = `wss://app777.acapp.acwing.com.cn/websocket/${store.state.user.token}/`;
 
             store.commit("updateIsRecord", false);
 
@@ -87,5 +89,16 @@
 </script>
 
 <style scoped>
-
+div.user-color1 {
+    text-align: center;
+    color : #4876EC;
+    font-size: 30px;
+    font-weight: 600;
+}
+div.user-color2 {
+    text-align: center;
+    color : #F94848;
+    font-size: 30px;
+    font-weight: 600;
+}
 </style>
