@@ -1,12 +1,15 @@
 <template>
-    <PlayGround v-if = "$store.state.pk.status === 'playing'" /> 
-    <MatchGrond v-if = "$store.state.pk.status === 'matching'" />
-    <ResultBoard v-if = "$store.state.pk.loser !== 'none'" />
-    <div class = "user-color1" v-if = "$store.state.pk.status === 'playing' && parseInt($store.state.user.id) === parseInt($store.state.pk.a_id)">left-bottom</div>
-    <div class = "user-color2" v-if = "$store.state.pk.status === 'playing' && parseInt($store.state.user.id) === parseInt($store.state.pk.b_id)">right-top</div>
+    <ContentField>
+        <PlayGround v-if = "$store.state.pk.status === 'playing'" /> 
+        <MatchGrond v-if = "$store.state.pk.status === 'matching'" />
+        <ResultBoard v-if = "$store.state.pk.loser !== 'none'" />
+        <div class = "user-color1" v-if = "$store.state.pk.status === 'playing' && parseInt($store.state.user.id) === parseInt($store.state.pk.a_id)">left-bottom</div>
+        <div class = "user-color2" v-if = "$store.state.pk.status === 'playing' && parseInt($store.state.user.id) === parseInt($store.state.pk.b_id)">right-top</div>
+    </ContentField>
 </template>
 
 <script>
+    import ContentField from "../../components/ContentField.vue";
     import PlayGround from "../../components/PlayGround.vue";
     import MatchGrond from "../../components/MatchGround.vue";
     import ResultBoard from "../../components/ResultBoard.vue";
@@ -15,6 +18,7 @@
 
     export default {
         components : {
+            ContentField,
             PlayGround,
             MatchGrond,
             ResultBoard,
