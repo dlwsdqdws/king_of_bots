@@ -59,7 +59,6 @@
     import { useStore } from "vuex";
     import { ref } from "vue";
     import $ from 'jquery';
-    import router from "../../router/index";
 
     export default {
         components : {
@@ -160,12 +159,6 @@
                             b_steps : record.record.bsteps,
                         });
                         store.commit("updateRecordLoser", record.record.loser);
-                        router.push({
-                            name : "record_content",
-                            params : {
-                                recordId,
-                            }
-                        });
                         break;
                     }
                 }
