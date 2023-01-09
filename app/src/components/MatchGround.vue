@@ -1,42 +1,39 @@
 <template>
-    <div class = "matchground">
-        <div class="row">
-            <div class="col-4">
-                <div class="user-photo">
-                    <img :src = "$store.state.user.photo" alt = "" >
+    <div class="matchground-field">
+        <div class = "matchground">
+            <div class = "matchground-head">
+                <div>
+                    <div class="user-photo">
+                        <img :src = "$store.state.user.photo" alt = "" >
+                    </div>
+                    <div class="user-username">
+                        {{ $store.state.user.username }}
+                    </div>
                 </div>
-                <div class="user-username">
-                    {{ $store.state.user.username }}
+                    <div class = "user-select-bot">
+                        <select v-model = "select_bot" class="form-select" aria-label="Default select example">
+                            <option value = "-1" selected>Manual</option>
+                            <option v-for = "bot in bots" :key = "bot.id" :value="bot.id">
+                                {{ bot.title }}
+                            </option>
+                        </select>
+                    </div>
+                <div>
+                    <div class="user-photo">
+                        <img :src = "$store.state.pk.opponent_photo" alt = "" >
+                    </div>
+                    <div class="user-username">
+                        {{ $store.state.pk.ooponent_username }}
+                    </div>
                 </div>
             </div>
-            <div class="col-4">
-                <div class = "user-select-bot">
-                    <select v-model = "select_bot" class="form-select" aria-label="Default select example">
-                        <option value = "-1" selected>Manual</option>
-                        <option v-for = "bot in bots" :key = "bot.id" :value="bot.id">
-                            {{ bot.title }}
-                        </option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-4">
-                <div class="user-photo">
-                    <img :src = "$store.state.pk.opponent_photo" alt = "" >
-                </div>
-                <div class="user-username">
-                    {{ $store.state.pk.ooponent_username }}
-                </div>
-            </div>
-            <div class="col-12">
-                <div class="d-grid gap-2 col-4 mx-auto" style = "padding-top: 20vh;">
-                    <button @click = "click_match_btn" class="btn btn-primary btn-lg" type="button">
-                        {{ match_btn_info }}
-                    </button>
-                </div>
-            </div>  
+                    <div class = "match-button">
+                        <button @click = "click_match_btn" type="button">
+                            {{ match_btn_info }}
+                        </button>
+                    </div>
         </div>
     </div>
-    
 </template>
 
 <script>
@@ -95,32 +92,67 @@ export default {
 </script>
 
 <style scoped>
+div.matchground-field{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 div.matchground {
-    width : 60vw;
-    height : 70vh;
-    margin : 40px auto;
-    background-color: rgba(50, 50, 50, 0.5);;
+    width : 60%;
+    height : 65%;
+    background-color: rgba(50, 50, 50, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+div.matchground-head {
+    display: flex;
+    justify-content: space-evenly;
 }
 div.user-photo {
     text-align : center;
-    padding-top: 10vh;
 }
 div.user-photo > img {
     border-radius: 50%;
-    width : 20vh;
+    width : 10vh;
 }
 div.user-username {
     text-align : center;
-    font-size : 24px;
+    font-size : 20px;
     font-weight: 600;
     color : white;
     padding-top: 2vh;
 }
 div.user-select-bot {
-    padding-top: 20vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 15vw;
+    text-align: center;
 }
 div.user-select-bot>select{
-    width : 60%;
+    width: 12vw;
+    height: 5vh;
     margin: 0 auto;
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+.match-button {
+    text-align: center;
+}
+
+.match-button > button {
+    font-size: 20px;
+    color : white;
+    border-radius: 5px;
+    background-color: rgba(49, 108, 244);
+    padding : 10px 20px;
+    border : none;
+    cursor: pointer;
 }
 </style>
