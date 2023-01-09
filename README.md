@@ -1,7 +1,7 @@
 # king of bots(KOB)
 
 ## Version
-<br>Java 1.8
+Java 1.8
 <br> Vue 5.0.8
 
 ## Page Layout
