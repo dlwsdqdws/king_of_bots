@@ -1,5 +1,5 @@
 <template>
-  <div class="window">
+  <!-- <div class="window"> -->
     <div class="game-body">
       <MenuView v-if = "$store.state.router.router_name === 'menu'" />
       <PKIndexView v-else-if = "$store.state.router.router_name === 'pk'" />
@@ -8,7 +8,7 @@
       <RanklistIndexView v-else-if = "$store.state.router.router_name === 'ranklist'" />
       <UserBotIndexView v-else-if = "$store.state.router.router_name === 'user_bot'" />
     </div>
-  </div>
+  <!-- </div> -->
 </template>
 
 <script>
@@ -53,7 +53,7 @@
   }
 </script>
 
-<style>
+<style scoped>
   body{
     margin: 0;
   }
