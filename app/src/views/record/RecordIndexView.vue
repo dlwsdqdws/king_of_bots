@@ -159,6 +159,7 @@
                             b_steps : record.record.bsteps,
                         });
                         store.commit("updateRecordLoser", record.record.loser);
+                        store.commit("updateRouterName", "record_content");
                         break;
                     }
                 }
