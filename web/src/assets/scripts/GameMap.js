@@ -80,8 +80,6 @@ export class GameMap extends BaseGameObject {
                 else if (e.key === 's') d = 2;
                 else if (e.key === 'a') d = 3;
     
-                // console.log(d); 
-    
                 if(d >= 0){
                     this.store.state.pk.socket.send(JSON.stringify({
                         event : "move",

@@ -150,13 +150,9 @@
                     },
                     success(resp){
                         users.value = resp.users;
-                        // console.log(resp);
                         tot_users = resp.user_cnt;
                         update_pages();
                     },
-                    error(resp){
-                        console.log(resp);
-                    }
                 });
             }
 
@@ -171,23 +167,13 @@
                         Authorization : "Bearer " + store.state.user.token,
                     },
                     success(resp){
-                        console.log(resp);
                         winners.value = resp.users;
                     },
-                    error(resp){
-                        console.log(resp);
-                    }
                 });
             }
 
             pull_page(current_page);
             pull_winners();
-
-            // console.log("start");
-            // console.log(users);
-            // console.log("end");
-
-
             return {
                 users,
                 pages,

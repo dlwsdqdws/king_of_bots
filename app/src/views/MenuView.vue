@@ -71,7 +71,7 @@ div.menu-item {
 }
 
 div.menu-item:hover {
-    scale : 1.2;
+    transform: scale(1.2);
     transition: 200ms;
 }
 

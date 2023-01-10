@@ -101,7 +101,7 @@ div.matchground-field{
 }
 
 div.matchground {
-    width : 60%;
+    width : 65%;
     height : 65%;
     background-color: rgba(50, 50, 50, 0.5);
     display: flex;

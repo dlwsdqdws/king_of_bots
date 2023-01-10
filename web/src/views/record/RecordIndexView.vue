@@ -119,9 +119,6 @@
                         tot_records = resp.records_cnt;
                         update_pages();
                     },
-                    error(resp){
-                        console.log(resp);
-                    }
                 });
             }
 
@@ -145,7 +142,6 @@
                 for(const record of records.value){
                     if(record.record.id === recordId){
                         store.commit("updateIsRecord", true);
-                        // console.log(record);
                         store.commit("updateGame", {
                             map : stringTo2D(record.record.map),
                             a_id : record.record.aid,

@@ -1,56 +1,60 @@
 <template>
     <ContentField>
-        <table class="table table-striped table-hover" style = "text-align: center;">
-            <thead>
-                <tr>
-                    <th>PlayerA</th>
-                    <th>PlayerB</th>
-                    <th>Winner</th>
-                    <th>Match Time(PST)</th>
-                    <th>Operations</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for = "record in records" :key = "record.record.id">
-                    <td>
-                        <img :src = "record.a_photo" alt = "" class = "record-user-photo">
-                        &nbsp;
-                        <span class = "record-user-username">
-                            {{ record.a_username }}
-                        </span>
-                    </td>
-                    <td>
-                        <img :src = "record.b_photo" alt = "" class = "record-user-photo">
-                        &nbsp;
-                        <span class = "record-user-username">
-                            {{ record.b_username }}
-                        </span>
-                    </td>
-                    <td>{{ record.result }}</td>
-                    <td>
-                        {{ record.record.createtime }}
-                    </td>
-                    <td>
-                        <button  @click="open_record_content(record.record.id)" type="button" class="btn btn-secondary">View Steps</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <nav aria-label="...">
-            <ul class="pagination" style = "float: right; padding-right: 5vw;">
-                <li class="page-item" @click="click_page(-2)">
-                    <a class="page-link" href="#">Previous</a>
-                </li>
-                <li :class="'page-item ' + page.is_pull_page" v-for = "page in pages" :key = "page.number" @click="click_page(page.number)">
-                    <a class="page-link" href="#">
-                        {{ page.number }}
-                    </a>
-                </li>
-                <li class="page-item" @click="click_page(-1)">
-                    <a class="page-link" href="#">Next</a>
-                </li>
-            </ul>
-        </nav>
+        <div class="game-table">
+            <div>
+                <table style = "text-align: center;">
+                    <thead>
+                        <tr>
+                            <th>PlayerA</th>
+                            <th>PlayerB</th>
+                            <th>Winner</th>
+                            <th>Match Time(PST)</th>
+                            <th>Operations</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for = "record in records" :key = "record.record.id">
+                            <td class = "game-table-username">
+                                <img :src = "record.a_photo" alt = "" class = "record-user-photo">
+                                &nbsp;
+                                <span class = "record-user-username">
+                                    {{ record.a_username }}
+                                </span>
+                            </td>
+                            <td class = "game-table-username">
+                                <img :src = "record.b_photo" alt = "" class = "record-user-photo">
+                                &nbsp;
+                                <span class = "record-user-username">
+                                    {{ record.b_username }}
+                                </span>
+                            </td>
+                            <td>{{ record.result }}</td>
+                            <td>
+                                {{ record.record.createtime }}
+                            </td>
+                            <td>
+                                <button  @click="open_record_content(record.record.id)" type="button">View Steps</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <nav aria-label="...">
+                    <ul style="padding: 0;">
+                        <li class="game-page-item" @click="click_page(-2)">
+                            <a class="game-page-link" href="#">Previous</a>
+                        </li>
+                        <li :class="'game-page-item ' + page.is_pull_page" v-for = "page in pages" :key = "page.number" @click="click_page(page.number)">
+                            <a class="game-page-link" href="#">
+                                {{ page.number }}
+                            </a>
+                        </li>
+                        <li class="game-page-item" @click="click_page(-1)">
+                            <a class="game-page-link" href="#">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
     </ContentField>
 </template>
 
@@ -118,9 +122,6 @@
                         tot_records = resp.records_cnt;
                         update_pages();
                     },
-                    error(resp){
-                        console.log(resp);
-                    }
                 });
             }
 
@@ -144,7 +145,6 @@
                 for(const record of records.value){
                     if(record.record.id === recordId){
                         store.commit("updateIsRecord", true);
-                        // console.log(record);
                         store.commit("updateGame", {
                             map : stringTo2D(record.record.map),
                             a_id : record.record.aid,
@@ -175,8 +175,69 @@
 </script>
 
 <style scoped>
+div.game-table {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+div.game-table table {
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 5px;
+}
 img.record-user-photo{
-    width: 4.5vh;
+    width: 4vh;
     border-radius: 50%;
 }
+
+.game-table-username{
+    text-align: left;
+    /* long username truncation */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 7.5vw;
+}
+
+td {
+    width: 7.5vw;
+}
+
+th {
+    text-align: center;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-page-item {
+    display: inline-block;
+    padding : 8px 12px;
+    background-color: rgb(255, 192, 203, 0.5);
+    border : 1px solid #dedede;
+    cursor: pointer;
+    user-select: none;
+}
+.game-page-item:hover {
+    background-color: #E9ECEF;
+}
+
+.game-page-item.active {
+    background-color: #0d6efd;
+}
+
+.game-page-item.active > a {
+    color : white;
+}
+
+.game-page-link {
+    color: #0d6efd;
+    text-decoration: none;
+}
+
 </style>
