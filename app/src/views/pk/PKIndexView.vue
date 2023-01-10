@@ -94,11 +94,19 @@ div.user-color1 {
     color : #4876EC;
     font-size: 30px;
     font-weight: 600;
+    position: absolute;
+    bottom: 5vh;
+    width: 100%;
+    text-align: center;
 }
 div.user-color2 {
     text-align: center;
     color : #F94848;
     font-size: 30px;
     font-weight: 600;
+    position: absolute;
+    bottom: 5vh;
+    width: 100%;
+    text-align: center;
 }
 </style>

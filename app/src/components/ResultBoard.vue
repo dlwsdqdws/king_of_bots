@@ -48,8 +48,11 @@ div.result-board{
     width : 30vw;
     background-color: rgba(50, 50, 50, 0.5);
     position: absolute;
-    top: 35vh;
-    left: 35vw;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
 }
 div.result-board-text{
     text-align: center;
