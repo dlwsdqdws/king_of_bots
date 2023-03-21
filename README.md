@@ -1,7 +1,7 @@
 # king of bots(KOB)
 
 ## Link
-The game link is [www.dlwsdqdws.com](www.dlwsdqdws.com). Welcome to play.
+The game link is [www.dlwsdqdws.com](https://www.dlwsdqdws.com). Welcome to play.
 
 ## Version
 Java 1.8
