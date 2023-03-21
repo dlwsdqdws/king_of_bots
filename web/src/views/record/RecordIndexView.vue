@@ -106,7 +106,7 @@
             const pull_page = page => {
                 current_page = page
                 $.ajax({
-                    url : "https://app777.acapp.acwing.com.cn/api/record/getlist/",
+                    url : "https://www.dlwsdqdws.com/api/record/getlist/",
                     data : {
                         page,
                     },

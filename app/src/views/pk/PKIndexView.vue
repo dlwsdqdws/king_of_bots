@@ -26,7 +26,7 @@
 
         setup(){
             const store = useStore();
-            const socketUrl = `wss://app777.acapp.acwing.com.cn/websocket/${store.state.user.token}/`;
+            const socketUrl = `wss://www.dlwsdqdws.com/websocket/${store.state.user.token}/`;
 
             store.commit("updateIsRecord", false);
 

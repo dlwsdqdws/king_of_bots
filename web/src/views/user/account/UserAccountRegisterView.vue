@@ -43,7 +43,7 @@
 
             const register = () => {
                 $.ajax({
-                    url : "https://app777.acapp.acwing.com.cn/api/user/account/register/",
+                    url : "https://www.dlwsdqdws.com/api/user/account/register/",
                     type : "post",
                     data : {
                         username: username.value,

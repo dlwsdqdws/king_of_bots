@@ -1,5 +1,8 @@
 # king of bots(KOB)
 
+## Link
+The game link is [www.dlwsdqdws.com](www.dlwsdqdws.com). Welcome to play.
+
 ## Version
 Java 1.8
 <br> Vue 5.0.8
