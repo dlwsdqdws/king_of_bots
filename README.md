@@ -20,7 +20,7 @@ Game matching and operations. Need sign in first.
 #### Using keyboard as input
 W/A/S/D -> up, left, down, right
 #### Writing code as input
-Players can design different AI algorithms such as Min-Nax or Artificial Neural Network. 
+Players can design different AI algorithms such as Min-Max or Artificial Neural Network. 
 <br>A simple search algorithm sample as follows:
 
 ```java
@@ -96,6 +96,8 @@ Show ALL players' matching history, including players' usernames and photos, win
 Display the global leaderboard and especially the top three players.
 
 <p align="center"><img src="images/ranklist.png" alt="matching" width="500" /></p>
+
+## Backend Dataflow
 
 ## Version
 
