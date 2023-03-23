@@ -56,13 +56,15 @@ Show ALL players' matching history, including players' usernames and photos, win
 
 <p align="center"><img src="images/records.png" alt="matching" width="500" /></p>
 
-### Ranklists
+### Rank List
 
 Display the global leaderboard and especially the top three players.
 
 <p align="center"><img src="images/ranklist.png" alt="matching" width="500" /></p>
 
 ## Backend Dataflow
+
+<p align="center"><img src="images/dataflow.png" alt="matching" width="500" /></p>
 
 ## Version
 
